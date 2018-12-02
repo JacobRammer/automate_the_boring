@@ -2,7 +2,7 @@ import re  # import regular expressions
 
 message = "Call me at 111-222-3333 tomorrow, or at 444-555-6666 at my office phone any time."  # message to search
 
-phone_number = re.compile('\d\d\d-\d\d\d-\d\d\d\d')  # pattern to search \d = digit, "-" means dash
+phone_number = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')  # pattern to search \d = digit, "-" means dash. r stands for raw
 
 number_list = phone_number.findall(message)  # create number_list as a list. will search message for all phone numbers
 
@@ -23,6 +23,20 @@ new_list = phone_number.findall(file_text)  # create new_list as a list containi
 print(new_list)
 for i in new_list:
     print(i)
+
+
+phone_number_area_code = re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')  # () created groups
+area_code = phone_number_area_code.search("111-222-3333")
+
+print(area_code.group(1))  # prints the area code
+print(area_code.group(2))  # prints the number
+
+
+bat_regex = re.compile(r'Bat(man|mobile|copter|bat)')  # | means or
+
+# if any string matches with bat_regex, such as Batmobile. If not found, it will be nonetype and throw error
+bat_mo = bat_regex.search('Batmobile lost a wheel')
+print(bat_mo.group())
 
 
 def is_phone_number(text):  # phone number have 12 characters
